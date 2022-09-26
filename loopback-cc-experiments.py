@@ -35,10 +35,6 @@ class Script(scripts.Script):
         
         logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
-        # if cc_lut != "None":
-        #     logging.debug(f"Loading lut {cc_lut}")
-        #     lut = load_cube_file(cc_lut)
-
         processing.fix_seed(p)
         batch_count = p.n_iter
 
@@ -47,10 +43,11 @@ class Script(scripts.Script):
         f"initial seed: {p.seed}; \n"        
         f"initial denoising strength: {p.denoising_strength}; \n"
         f"denoising strength change factor: {denoising_strength_change_factor}; \n"
-        f"color correction: {opts.img2img_color_correction}; \n"
-        f"apply cc every N loops: {cc_interval} \n"
-        f"recalibrate cc every N loops: {cc_recalibration_interval} \n"
-        f"use LUT: {cc_lut} \n")
+        f"color correction enabled in main options?: {opts.img2img_color_correction}; \n"
+        f"Color correction window size: {cc_window_size} \n"
+        f"Color correction window slide rate: {cc_window_rate} \n"
+        f"Color correction window start delay: {cc_window_delay} \n"
+        f"apply cc every N loops: {cc_interval} \n")
 
         p.batch_size = 1
         p.n_iter = 1
@@ -62,8 +59,6 @@ class Script(scripts.Script):
         grids = []
         all_images = []
         state.job_count = loops * batch_count
-
-        
 
         old_cc_opt = opts.img2img_color_correction
         logging.info("Overriding color correction option to false in main processing so that we can control color correction in the script loop.")
