@@ -24,9 +24,9 @@ class Script(scripts.Script):
         loops = gr.Slider(minimum=1, maximum=500, step=1, label='Loops', value=4)
         denoising_strength_change_factor = gr.Slider(minimum=0.9, maximum=1.1, step=0.01, label='Denoising strength change factor', value=1)
         cc_target_type = gr.Radio(label='Color correction target', choices=['window', 'input'], value='window')
-        cc_window_size = gr.Slider(minimum=-1, maximum=50, step=1, label='Color correction window width', value=-1)
+        cc_window_size = gr.Slider(minimum=-1, maximum=50, step=1, label='Color correction window size', value=-1)
         cc_window_rate = gr.Slider(minimum=0.1, maximum=1, step=0.1, label='Color correction window slide rate', value=1)
-        cc_window_delay = gr.Slider(minimum=1, maximum=10, step=1, label='Color correction delay', value=0)
+        cc_window_delay = gr.Slider(minimum=1, maximum=10, step=1, label='Color correction window delay', value=0)
         cc_interval = gr.Slider(minimum=1, maximum=50, step=1, label='Color correction interval', value=1)
 
         return [loops, denoising_strength_change_factor, cc_target_type, cc_window_size, cc_window_rate, cc_window_delay, cc_interval]
