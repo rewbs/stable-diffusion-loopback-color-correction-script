@@ -43,7 +43,7 @@ With this script:
 
 ## Examples
 
-All examples below were generated with this script, then converted to video with a color histogram using ffmpeg (see ). 
+All examples below were generated with this script, then converted to video with a color histogram using ffmpeg (see [dir2vid.sh](https://github.com/rewbs/stable-diffusion-loopback-color-correction-script/blob/master/manual_tests/dirs2vid.sh) for specifics). The videos were combined into a grid [following this approach, also with ffmpeg](https://ottverse.com/stack-videos-horizontally-vertically-grid-with-ffmpeg/).
 
 
 ### Natural skin tones from a green init image
@@ -51,7 +51,7 @@ All examples below were generated with this script, then converted to video with
 * Prompt: `Classy studio photo portrait with (natural skin tones).`
 * Params: Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 8-87, Denoising strength: 0.5
 * Initial image:
-<img src="https://i.imgur.com/eYgtatG.png">
+<img src="https://i.imgur.com/eYgtatG.png" width=128>
 
 In the video below:
 * **Top-left:** (for reference) No color correction. Here we see the image rapidly skewing to magenta.
@@ -64,14 +64,12 @@ In the video below:
 https://user-images.githubusercontent.com/74455/192528827-c4696a99-9cf6-4ff7-8771-78ef835e7d0c.mp4
 
 
-
-
 ### Colour from a black and white init image
 
 * Prompt: `(Colorful) color photo of a man with yellow hair and a rainbow hat.`
 * Params: Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 24-103, Denoising strength: 0.68
 * Initial image:
-<img src="https://i.imgur.com/1d6ib3F.png">
+<img src="https://i.imgur.com/1d6ib3F.png" width=128>
 
 In the video below:
 * **Top-left:** (for reference) No color correction. Here the image does not skew to magenta too quickly because the denoise strength is a bit higher. However, the image still degrades aggressively.
@@ -85,6 +83,11 @@ https://user-images.githubusercontent.com/74455/192535122-dbb1d5b4-3338-4410-bdc
 
 ### Counter example
 
+In this example, the "official" color correction is clearly the winner. The input color palette is perfectly fine for the type of output being generated. Any attempt to apply a different correction seems to result in a reduction of the colours used, and ultimately a simplification and/or undesirable color fade. I don't know why this is: the alternative color corrections should theoretically allow the animation to veer into different colors, without necessarily converging into murkiness. :)
 
+* Prompt: Dramatic 4k high detail urban dense utopian cityscape at sunset.
+* Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 20-99, Size: 512x512, Denoising strength: 0.6
+* Initial image:
+<img src="https://i.imgur.com/oCniFsz.png" width=128>
 
-
+https://user-images.githubusercontent.com/74455/192546570-6ea0c224-daea-46e8-b578-7fee30f6808d.mp4
