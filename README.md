@@ -8,7 +8,7 @@ This repo provides a script for that web ui that implements an extra img2img loo
 ## Installation
 
 * Copy `loopback-cc-experiments.py` into the scripts subdirectory in [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui).
-* After restarting the webui, you will see a script called `Loopback - color correction experiments` in the scripts list: <img src="https://i.imgur.com/fnv2NPm.png" width="640">
+* After restarting the webui, you will see a script called `Loopback - color correction experiments` in the scripts list: <img src="https://i.imgur.com/BlsV7nL.jpg" width="640">
 
 
 ## Background
@@ -26,10 +26,11 @@ This is just a workaround: ideally we'd prevent Stable Diffusion's magenta skew,
 
 The script provides the following options:
 
-* **Color correction target:** 
-  * `window` (default) means the color will be corrected to the mean color histogram of a sliding window of previously generated images in the loopback batch.
-  * `input` means the color of each frame will be corrected to the input's color histogram. This is the same as the "official" color correction logic and is primarily used for scripted comparison tested. When this is selected, the options for `window size`, `window slide rate` and `window delay` have no effect.
-*  **window size** (default: -1) how many frames to average over when computing the target color histogram. `-1` means grow the window, always starting at frame 0. 
+* **Include input image in target** whether to use the colours of the input image when applying colour correction.
+  * `never` - don't use the colours of the input image at all in the colour correction process.
+  * `first` - (default) only use the colours of the input image when processing the first frame.
+  * `always` - always add  the initial image to the list of images to use for color correction. How much influence the initial image has depends on how many other images are in the color correction window. For example, if you set the window size to `0` and this value to `always`, all frames will be color corrected to the input image (same behaviour as the default with normal loopback mode).
+* window size (default: -1) how many frames to average over when computing the target color histogram. -1 means grow the window frames a processed, always starting at frame 0 and ending at the processed frame if slide rate is 1. 
 *  **window slide rate** (default: 1) how fast to move the end of the window relative to the frame generation. For example, if the loopback is 80 frames long, a slide rate of `0.5` means that on the last generated frame, the window ends on frame 40.
 *  **window lag** (default: 0) how many frames the end of the window should lag behind the current frame. For example, a delay of `5` means the first 5 frames will have no color correction, and from the 6th frame, a window ending at frame 0 will begin to apply. 
 *  **color correction interval** (default: 1) do color correction every Nth frame, skip other frames. Default of 1 means color correction is applied on every frame.
