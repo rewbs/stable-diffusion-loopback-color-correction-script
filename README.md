@@ -1,5 +1,8 @@
 # Advanced color correction script forstable-diffusion-webui img2img loopback
 
+## **Update:** Color correction is no longer necessary in most cases, thanks to VAEs. [See here for details](https://www.reddit.com/r/StableDiffusion/comments/ydwnc3/good_news_vae_prevents_the_loopback_magenta_skew/).
+
+
 [Stable Diffusion](https://stability.ai/blog/stable-diffusion-public-release) is an AI image generation tool. [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) is a web ui for that tool.
 
 This repo provides a script for that web ui that implements an extra img2img loopback mode with advanced color correction options. Specifically, it allows you to color-correct the input to each generated frame to the average histogram of a sliding window of previously generated frames.
